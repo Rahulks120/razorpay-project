@@ -1,4 +1,4 @@
-package com.ivoyant.project.razorpay_clone.entity;
+package com.ivoyant.project.ivo_internshub.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +20,7 @@ public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private LocalDate date;
+    private String date;
     private String message;
 
 }
