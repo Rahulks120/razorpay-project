@@ -1,4 +1,4 @@
-package com.ivoyant.project.razorpay_clone.entity;
+package com.ivoyant.project.ivo_internshub.entity;
 
 
 import jakarta.persistence.Entity;
@@ -11,14 +11,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Employee {
 
     @Id
-    private String id;
+    private Long id;
 
     private String name;
+
     private String role;
+
     private String manager;
 }
 

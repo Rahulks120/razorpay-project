@@ -1,4 +1,4 @@
-package com.ivoyant.project.razorpay_clone.entity;
+package com.ivoyant.project.ivo_internshub.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,10 +17,10 @@ import java.time.LocalDate;
 public class Holiday {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-    private LocalDate date;
+    private String date;
 
 }

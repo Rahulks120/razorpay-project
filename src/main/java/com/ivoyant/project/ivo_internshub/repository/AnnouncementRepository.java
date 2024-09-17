@@ -1,6 +1,6 @@
-package com.ivoyant.project.razorpay_clone.repository;
+package com.ivoyant.project.ivo_internshub.repository;
 
-import com.ivoyant.project.razorpay_clone.entity.Announcement;
+import com.ivoyant.project.ivo_internshub.entity.Announcement;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
