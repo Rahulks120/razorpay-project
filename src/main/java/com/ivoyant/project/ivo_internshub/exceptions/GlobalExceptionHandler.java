@@ -13,31 +13,17 @@ public class GlobalExceptionHandler {
         this.customObject = customObject;
     }
 
-    private ResponseEntity<CustomExceptionObject> buildResponseEntity(Exception e, HttpStatus status) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<CustomExceptionObject> handleResourceNotFoundException(Exception e) {
         customObject.setMessage(e.getMessage());
-        customObject.setStatusCode(status.value());
-        return ResponseEntity.status(status).body(customObject);
-    }
-
-    @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<CustomExceptionObject> handleEmployeeNotFoundException(Exception e) {
-        return buildResponseEntity(e, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(AnnouncementNotFoundException.class)
-    public ResponseEntity<CustomExceptionObject> handleAnnouncementNotFoundException(Exception e) {
-        return buildResponseEntity(e, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(HolidayNotFoundException.class)
-    public ResponseEntity<CustomExceptionObject> handleHolidayNotFoundException(Exception e) {
-        return buildResponseEntity(e, HttpStatus.NOT_FOUND);
+        customObject.setStatusCode(HttpStatus.NOT_FOUND.value());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customObject);
     }
 
     @ExceptionHandler(EmployeeIdAlreadyExistsException.class)
     public ResponseEntity<CustomExceptionObject> handleEmployeeIdAlreadyExistsException(Exception e) {
-        return buildResponseEntity(e, HttpStatus.BAD_REQUEST);
+        customObject.setMessage(e.getMessage());
+        customObject.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(customObject);
     }
-
-
 }

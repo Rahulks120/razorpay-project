@@ -3,10 +3,8 @@ package com.ivoyant.project.ivo_internshub.service;
 import com.ivoyant.project.ivo_internshub.entity.Announcement;
 import com.ivoyant.project.ivo_internshub.entity.Holiday;
 import com.ivoyant.project.ivo_internshub.entity.Employee;
-import com.ivoyant.project.ivo_internshub.exceptions.AnnouncementNotFoundException;
 import com.ivoyant.project.ivo_internshub.exceptions.EmployeeIdAlreadyExistsException;
-import com.ivoyant.project.ivo_internshub.exceptions.EmployeeNotFoundException;
-import com.ivoyant.project.ivo_internshub.exceptions.HolidayNotFoundException;
+import com.ivoyant.project.ivo_internshub.exceptions.ResourceNotFoundException;
 import com.ivoyant.project.ivo_internshub.repository.AnnouncementRepository;
 import com.ivoyant.project.ivo_internshub.repository.HolidayRepository;
 import com.ivoyant.project.ivo_internshub.repository.EmployeeRepository;
@@ -47,7 +45,7 @@ public class DashboardService {
         Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee == null) {
             log.error("Employee not found with ID :" + id);
-            throw new EmployeeNotFoundException(id);
+            throw new ResourceNotFoundException("Employee not found with ID :" + id);
         }
         log.info("Found Employee with id :" + id);
         return employee;
@@ -68,7 +66,7 @@ public class DashboardService {
         boolean isExists=employeeRepository.existsById(employee.getId());
         if(isExists) {
             log.error("Employee already exists with id:" + employee.getId());
-            throw new EmployeeIdAlreadyExistsException(employee.getId());
+            throw new EmployeeIdAlreadyExistsException("Employee already exists with id:" + employee.getId());
         }
         log.info("Employee created with id:" + employee.getId());
         return employeeRepository.save(employee);
@@ -78,7 +76,7 @@ public class DashboardService {
         boolean isExists = employeeRepository.existsById(id);
         if (!isExists) {
             log.error("Employee not present with id :"+ id );
-            throw new EmployeeNotFoundException(id);
+            throw new ResourceNotFoundException("Employee not present with id :"+ id);
         } else {
             log.info("Updated employee with id:"+id);
             Employee updatedEmployee = employeeRepository.findById(id).orElse(null);
@@ -93,7 +91,7 @@ public class DashboardService {
         boolean isExists = announcementRepository.existsById(id);
         if (!isExists) {
             log.error("Announcement not present with id :"+ id );
-            throw new AnnouncementNotFoundException(id);
+            throw new ResourceNotFoundException("Announcement not present with id :"+ id);
         } else {
             log.info("Updated Announcement with id:"+id);
             Announcement updatedAnnouncement = announcementRepository.findById(id).orElse(null);
@@ -107,7 +105,7 @@ public class DashboardService {
         boolean isExists = holidayRepository.existsById(id);
         if (!isExists) {
             log.error("Holiday not present with id :"+ id );
-            throw new HolidayNotFoundException(id);
+            throw new ResourceNotFoundException("Holiday not present with id :"+ id);
         } else {
             log.info("Updated holiday with id:"+id);
             Holiday updatedHoliday = holidayRepository.findById(id).orElse(null);
